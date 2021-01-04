@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="mb-4">
+        <a href="{% url 'new_question'  %}" class="bttn btn btn-block btn-lg">Ask a Question?</a>
+    </div>  
+    <div class="row mx-md-n5">
+        <div class="col-lg-8 px-md-5">
+          <div class="p-2 border rounded bg-light">
+            <div class="title p-2 border rounded text-center">
+              <h6 class="text-uppercase font-weight-normal">Categories</h6>
+            </div>
+            <hr>
+            {% for board in boards %}
+            <div class="border rounded m-1">
+              <div class="row row-content align-items-center">
+                <div class="col-md-10 flex-first">
+                  <div class="media m-2">
+                    
+                    <img class="d-flex mr-3 img-thumbnail align-self-center" src="{{board.image.url}}"
+                      alt="{{board.name}}" />
+                    <div class="media-body px-3">
+                      <h2 class="mt-0 font-weight-bold">{{board.name}}</h2>
+                      <p class="hidden-xs-down">{{board.description}}</p>
+
+                      <a href="{% url 'board_topics' board.pk %}" class="bttn btn btn-outline-primary waves-effect">View</a>
+                      <p>
+                      {% with post=board.get_last_post %}
+                        {% if post %}
+                          <small>
+                            <a href="{% url 'topic_posts' board.pk post.topic.pk %}" style="color:grey;">
+                              By {{ post.created_by.username }} {{ post.created_at }}
+                            </a>
+                          </small>
+                        {% else %}
+                          <small class="text-muted">
+                            <em>No posts yet.</em>
+                          </small>
+                        {% endif %}
+                      {% endwith %}
+                      </p>
+                    </div>
+
+                  </div>
+                </div>
+                
+                <div class="sec3 col-md-2 row d-flex">
+                  <div class="col-auto">
+                    <h6>Posts</h6>
+                    <p>{{board.get_posts_count}}</p>
+                  </div>
+                  <div class="col-auto">
+                    <h6>Topics</h6>
+                    <p>{{board.topics.count}}</p>
+                  </div>
+                  <hr>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="col-lg-4 px-md-5 py-3">
+          <div class="p-3 border rounded bg-light">Trends</div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}

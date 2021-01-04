@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+{% if not request.user.is_authenticated %}
+<section class="container d-flex justify-content-start">
+    <div class='card' style="width: 30rem">
+        <div class="card-body">
+                <h5 class="card-title text-uppercase text-center font-weight-bold">{{title}}</h5>
+                <hr />
+                
+            <form method='POST' action='' enctype='multipart/form-data'>
+                {% csrf_token %}
+                {{ form | crispy }}
+                <script src='https://www.google.com/recaptcha/api.js'></script>
+                <div class="g-recaptcha" data-sitekey="6LfjS-QZAAAAAJQTJfFwXj1egTD7ZeqN0MpaWFnt"></div>
+                <br>
+                <input type='submit' class='bttn btn btn-default btn-block' value='{{ title }}' />
+            </form>
+        </div>
+
+    </div>
+</section>
+
+{# else #}
+    {# include "index.html" #}
+{% endif %}
+
+{% endblock %}

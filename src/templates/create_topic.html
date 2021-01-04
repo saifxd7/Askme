@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container">
+<div class="card p-3" style="width: 30rem">
+<form method="post" novalidate>
+  {% csrf_token %}
+
+  {% include 'includes/form.html' %}
+  <button type="submit" class="btn btn-success">Post</button>
+</form>
+</div>
+</div>
+{% endblock %}
