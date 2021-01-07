@@ -10,7 +10,7 @@ from .forms import CreateTopicForm, PostForm
 @login_required
 def home(request):
     boards = Board.objects.all()
-    return render(request, 'index.html', {'boards': boards})
+    return render(request, 'blog/board.html', {'boards': boards})
 
 
 @login_required
@@ -18,7 +18,7 @@ def board_topics(request, pk):
     board = get_object_or_404(Board, pk=pk)
     topics = board.topics.order_by(
         '-last_updated').annotate(replies=Count('posts') - 1)
-    return render(request, 'topics.html', {'board': board, 'topics': topics})
+    return render(request, 'blog/topics.html', {'board': board, 'topics': topics})
 
 
 @login_required
@@ -38,17 +38,17 @@ def create_topic(request, pk):
                 created_by=user
             )
             # redirect to the created topic page
-            return redirect('board_topics', pk=board.pk)
+            return redirect('blog/board_topics', pk=board.pk)
     else:
         form = CreateTopicForm()
-    return render(request, 'create_topic.html', {'board': board, 'form': form})
+    return render(request, 'blog/create_topic.html', {'board': board, 'form': form})
 
 
 def topic_posts(request, pk, topic_pk):
     topic = get_object_or_404(Topic, board__pk=pk, pk=topic_pk)
     topic.views += 1
     topic.save()
-    return render(request, 'topic_posts.html', {'topic': topic})
+    return render(request, 'blog/topic_posts.html', {'topic': topic})
 
 
 @login_required
@@ -64,7 +64,7 @@ def reply_topic(request, pk, topic_pk):
             return redirect('topic_posts', pk=pk, topic_pk=topic_pk)
     else:
         form = PostForm()
-    return render(request, 'reply_topic.html', {'topic': topic, 'form': form})
+    return render(request, 'blog/reply_topic.html', {'topic': topic, 'form': form})
 
 
 @login_required

@@ -25,7 +25,8 @@ from django.conf.urls.static import static
 from accounts import views
 
 urlpatterns = [
-    path('', include("boards.urls")),
+    path('', include("Qpost.urls")),
+    path('blog/', include("boards.urls", namespace="blog-app")),
     path('admin/', admin.site.urls),
     path('register/', views.register_view, name='register'),
     path('login/', views.login_view, name='login'),

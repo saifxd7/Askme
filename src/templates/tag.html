@@ -1,16 +1,12 @@
-{% extends "base.html" %}
-
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}{{tag}}{% endblock %}
 {% block content %}
-<div class="container py-4">
-    {% include "components/search.html" %}
-
     <!-- Question List -->
-
-    
-
-    <div class="container mt-2">
+    <div class="container py-5">
         {% for quest in quests %}
-        <div class="card mb-4 shadow">
+        <div class="card mb-3">
             <div class="card-body">
                 <h4 class="card-title"><a href="/detail/{{quest.id}}">{{quest.title}}</a></h4>
                 <p class="card-text">{{quest.detail}}</p>
@@ -19,9 +15,6 @@
                     <a href="#" class="mr-2">{{quest.answer_set.count}} Answers</a>
                     <a href="#" class="mr-2">{{quest.total_comments}} Comments</a>
                 </p>
-            </div>
-            <div class="card-footer">
-                <small>{{quest.add_time}}</small>
             </div>
         </div>
         {% endfor %}
@@ -46,5 +39,4 @@
         </ul>
       </nav>
     {% endif %}
-</div>
 {% endblock %}

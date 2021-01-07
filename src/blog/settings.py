@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     # third-party apps
     'crispy_forms',
     'widget_tweaks',
@@ -47,7 +48,7 @@ INSTALLED_APPS = [
     # apps
     'accounts',
     'boards',
-    # 'posts',
+    'Qpost',
 
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
