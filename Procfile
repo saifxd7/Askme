@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath src blog.wsgi
+web: sh ./app/run.sh
