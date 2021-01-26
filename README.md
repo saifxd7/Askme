@@ -1,6 +1,6 @@
 # Askme
 
-On progress <br /> for demonstration
+In progress <br /> for demonstration
 
 1. Create virtual environment and activate the environment
 
