@@ -1,0 +1,87 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap");
+
+body {
+    padding: 0;
+    margin: 0;
+    background: #f2f6e9;
+    font-family: "Lato", sans-serif;
+}
+
+.header {
+    background-color: #5a189a;
+    height: 250px;
+}
+
+/*--- navigation bar ---*/
+
+.navbar-nav {
+    background-color: #5a189a;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-weight: 900;
+}
+
+.nav-link,
+.navbar-brand {
+    color: #fff;
+    cursor: pointer;
+}
+
+.nav-link {
+    margin-right: 1em !important;
+    margin-bottom: 5px;
+}
+
+.nav-link:hover {
+    background-color: #9d4edd;
+    border-radius: 5px;
+    color: #10002b;
+}
+
+
+.navbar-collapse {
+    justify-content: flex-end;
+}
+
+.title {
+    background-color: #5A189A;
+    color: #fff;
+}
+
+.title h6 {
+    font-weight: 700;
+}
+
+.bttn {
+    font-weight: bold;
+    background-color: #7b2cbf;
+    color: #fff;
+    border: 0px solid;
+}
+
+.bttn:hover {
+    background-color: #9d4edd;
+    color: #10002b;
+}
+
+.sec1 nav .breadcrumb {
+    background-color: #7b2cbf;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+    display: inline-block;
+    padding-right: .5rem;
+    color: #fff;
+    content: "/";
+}
+
+.img-thumbnail {
+    width: 150px;
+    height: 150px;
+}
+
+.sec3 h6 {
+    font-weight: bold;
+}
