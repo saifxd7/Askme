@@ -12,8 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from django.contrib.messages import constants as messages
 from pathlib import Path
 import os
-import django_heroku
-django_heroku.settings(locals())
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +27,7 @@ SECRET_KEY = '1qbibocsi^uabkh)bw174w7am4eltv$b%ja4%iu^m-9c^rz*f8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1:8000']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -63,7 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+
 ]
 
 LOGIN_URL = "/login/"
@@ -169,4 +168,4 @@ MESSAGE_TAGS = {
 }
 
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
