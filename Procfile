@@ -1,1 +1,2 @@
-web: sh ./app/run.sh
+web: sh -c 'cd src/ && gunicorn blog.wsgi'
+
