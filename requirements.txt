@@ -13,8 +13,5 @@ pycodestyle==2.6.0
 pytz==2020.4
 sqlparse==0.4.1
 toml==0.10.2
-<<<<<<< HEAD
 gunicorn==20.0.4
-=======
-gunicorn==20.0.4
->>>>>>> 43062bc607c83487b2fbbdeb433e71732a266f40
+
