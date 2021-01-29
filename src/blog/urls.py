@@ -26,9 +26,10 @@ from accounts import views
 
 urlpatterns = [
     path('', include("Qpost.urls")),
-    path('blog/', include("boards.urls", namespace="blog-app")),
+    # path('blog/', include("boards.urls", namespace="blog-app")),
     path('admin/', admin.site.urls),
     path('register/', views.register_view, name='register'),
+    path('activate/<uidb64>/<token>/', views.activate, name='activate'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
     # path('comments/', include("comments.urls")),

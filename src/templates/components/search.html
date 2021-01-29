@@ -1,9 +1,21 @@
 <div class="container">
     <div class="row">
+        {% if request.user.is_authenticated %}
         <div class="col-md-3">
-            <a href="{% url 'ask-question'  %}" class="bttn btn btn-lg">Ask a Question?</a>
+            <a href="{% url 'ask-question'  %}" class="bttn btn btn-block btn-lg">Ask a Question?</a>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-9">
+            <form>
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control form-control-lg" placeholder="Search" />
+                    <div class="input-group-append">
+                    <button class=" sbtn btn btn-lg" type="submit" id="button-addon2">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        {% else %}
+        <div class="col-md-12">
             <form>
                 <div class="input-group">
                     <input type="text" name="q" class="form-control form-control-lg" placeholder="Search" />
@@ -13,5 +25,6 @@
                 </div>
             </form>
         </div>
+        {% endif %}
     </div>
 </div>

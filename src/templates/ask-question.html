@@ -5,9 +5,7 @@
     <div class="card mt-5">
         <h5 class="card-header">Ask Question</h5>
         <div class="card-body">
-            {% for msg in messages %}
-            <p class="text-success">{{msg}}</p>
-            {% endfor %}
+            
             <form method="post">
                 {% csrf_token %}
                 <table class="table table-bordered">

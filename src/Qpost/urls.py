@@ -15,4 +15,5 @@ urlpatterns = [
     path('tag/<str:tag>', views.tag, name='tag'),
     # Tags Page
     path('tags', views.tags, name='tags'),
+
 ]

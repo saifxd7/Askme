@@ -24,6 +24,7 @@ class UserLoginForm(forms.Form):
         # if user_qs.count() == 1:
         #     user = user_qs.first()
         if username and password:
+
             user = authenticate(username=username, password=password)
             if not user:
                 raise forms.ValidationError("This user does not exist")
@@ -36,7 +37,6 @@ class UserLoginForm(forms.Form):
 
 class UserRegisterForm(forms.ModelForm):
     email = forms.EmailField(label='Email address')
-    #email2 = forms.EmailField(label='Confirm Email')
     password = forms.CharField(min_length=8, widget=forms.PasswordInput)
 
     class Meta:

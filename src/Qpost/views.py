@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from django.http import JsonResponse
 from .models import Question, Answer, Comment, UpVote, DownVote
 from django.core.paginator import Paginator
@@ -106,6 +106,7 @@ def ask_form(request):
             questForm.user = request.user
             questForm.save()
             messages.success(request, 'Question has been added.')
+            return redirect('home')
     return render(request, 'ask-question.html', {'form': form})
 
 
