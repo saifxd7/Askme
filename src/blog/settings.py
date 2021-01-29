@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = '1qbibocsi^uabkh)bw174w7am4eltv$b%ja4%iu^m-9c^rz*f8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -147,7 +147,7 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_files")
 MEDIA_URL = "/media/"
 
 # Recaptcha
-GOOGLE_RECAPTCHA_SECRET_KEY = os.environ.get('GOOGLE_RECAPTCHA_SECRET_KEY')
+GOOGLE_RECAPTCHA_SECRET_KEY = '6LfjS-QZAAAAACYrsDvlr_A04v9NGKocDxxgZUBT'
 
 EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
 MAILER_EMAIL_BACKEND = EMAIL_BACKEND
