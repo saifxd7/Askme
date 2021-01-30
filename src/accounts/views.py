@@ -96,75 +96,77 @@ def register_view(request):
             # user = ASCIIUsernameValidator()
             password = form.cleaned_data.get('password')
             user.set_password(password)
-<<<<<<< HEAD
 
-            # current_site = get_current_site(request)
-            # mail_subject = 'Activate your account.'
-            # message = render_to_string('accounts/acc_active_email.html', {
-            #     'user': user,
-            #     'domain': current_site.domain,
-            #     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-            #     'token': default_token_generator.make_token(user),
-            # })
-            # to_email = form.cleaned_data.get('email')
-            # email = EmailMessage(
-            #     mail_subject, message, to=[to_email]
-            # )
-            # email.send()
-            # return HttpResponse('Please confirm your email address to complete the registration')
-            user.save()
-            # new_user = authenticate(
-            #     username=user.username, password=password)
-            # messages.success(request, 'Register Successfully.')
-            # login(request, new_user)
 
-            # if next:
-            #     return redirect(next)
-            # return redirect("/")
-=======
-            user.save()
-            current_site = get_current_site(request)
+<< << << < HEAD
 
-            mail_subject = 'Activate your account.'
+           # current_site = get_current_site(request)
+           # mail_subject = 'Activate your account.'
+           # message = render_to_string('accounts/acc_active_email.html', {
+           #     'user': user,
+           #     'domain': current_site.domain,
+           #     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+           #     'token': default_token_generator.make_token(user),
+           # })
+           # to_email = form.cleaned_data.get('email')
+           # email = EmailMessage(
+           #     mail_subject, message, to=[to_email]
+           # )
+           # email.send()
+           # return HttpResponse('Please confirm your email address to complete the registration')
+   user.save()
+    # new_user = authenticate(
+    #     username=user.username, password=password)
+    # messages.success(request, 'Register Successfully.')
+    # login(request, new_user)
 
-            message = render_to_string('accounts/acc_active_email.html', {
+    # if next:
+    #     return redirect(next)
+    # return redirect("/")
+== == == =
+   user.save()
+    current_site = get_current_site(request)
 
-                'user': user,
+    mail_subject = 'Activate your account.'
 
-                'domain': current_site.domain,
+    message = render_to_string('accounts/acc_active_email.html', {
 
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'user': user,
 
-                'token': default_token_generator.make_token(user),
+        'domain': current_site.domain,
 
-            })
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
 
-            to_email = form.cleaned_data.get('email')
+        'token': default_token_generator.make_token(user),
 
-            email = EmailMessage(
+    })
 
-                 mail_subject, message, to=[to_email]
+    to_email = form.cleaned_data.get('email')
 
-            )
+    email = EmailMessage(
 
-            email.send()
+        mail_subject, message, to=[to_email]
 
-            return HttpResponse('Please confirm your email address to complete the registration')
-            
-            if next:
-                return redirect(next)
-            return redirect("/")
->>>>>>> 0a9d3d32a4a86bea02c154b147c5337c9a26107e
+    )
 
-        else:
-            messages.error(
-                request, 'Invalid reCAPTCHA. Please try again.')
+    email.send()
 
-<<<<<<< HEAD
-=======
-        
->>>>>>> 0a9d3d32a4a86bea02c154b147c5337c9a26107e
-    else:
+    return HttpResponse('Please confirm your email address to complete the registration')
+
+    if next:
+        return redirect(next)
+    return redirect("/")
+>>>>>> > 0a9d3d32a4a86bea02c154b147c5337c9a26107e
+
+   else:
+        messages.error(
+            request, 'Invalid reCAPTCHA. Please try again.')
+
+<< << << < HEAD
+== == == =
+
+>>>>>> > 0a9d3d32a4a86bea02c154b147c5337c9a26107e
+   else:
         form = UserRegisterForm()
 
     context = {
