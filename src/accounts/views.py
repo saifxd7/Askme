@@ -97,76 +97,37 @@ def register_view(request):
             password = form.cleaned_data.get('password')
             user.set_password(password)
 
+            # current_site = get_current_site(request)
+            # mail_subject = 'Activate your account.'
+            # message = render_to_string('accounts/acc_active_email.html', {
+            #     'user': user,
+            #     'domain': current_site.domain,
+            #     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            #     'token': default_token_generator.make_token(user),
+            # })
+            # to_email = form.cleaned_data.get('email')
+            # email = EmailMessage(
+            #     mail_subject, message, to=[to_email]
+            # )
+            # email.send()
+            # return HttpResponse('Please confirm your email address to complete the registration')
+            user.save()
+            new_user = authenticate(username=user.username, password=password)
+            messages.success(request, 'Register Successfully.')
+            login(request, new_user)
 
-<< << << < HEAD
+            
+            if next:
+                return redirect(next)
+            return redirect("/")
 
-           # current_site = get_current_site(request)
-           # mail_subject = 'Activate your account.'
-           # message = render_to_string('accounts/acc_active_email.html', {
-           #     'user': user,
-           #     'domain': current_site.domain,
-           #     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-           #     'token': default_token_generator.make_token(user),
-           # })
-           # to_email = form.cleaned_data.get('email')
-           # email = EmailMessage(
-           #     mail_subject, message, to=[to_email]
-           # )
-           # email.send()
-           # return HttpResponse('Please confirm your email address to complete the registration')
-   user.save()
-    # new_user = authenticate(
-    #     username=user.username, password=password)
-    # messages.success(request, 'Register Successfully.')
-    # login(request, new_user)
 
-    # if next:
-    #     return redirect(next)
-    # return redirect("/")
-== == == =
-   user.save()
-    current_site = get_current_site(request)
+        else:
+            messages.error(
+                request, 'Invalid reCAPTCHA. Please try again.')
 
-    mail_subject = 'Activate your account.'
 
-    message = render_to_string('accounts/acc_active_email.html', {
-
-        'user': user,
-
-        'domain': current_site.domain,
-
-        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-
-        'token': default_token_generator.make_token(user),
-
-    })
-
-    to_email = form.cleaned_data.get('email')
-
-    email = EmailMessage(
-
-        mail_subject, message, to=[to_email]
-
-    )
-
-    email.send()
-
-    return HttpResponse('Please confirm your email address to complete the registration')
-
-    if next:
-        return redirect(next)
-    return redirect("/")
->>>>>> > 0a9d3d32a4a86bea02c154b147c5337c9a26107e
-
-   else:
-        messages.error(
-            request, 'Invalid reCAPTCHA. Please try again.')
-
-<< << << < HEAD
-== == == =
-
->>>>>> > 0a9d3d32a4a86bea02c154b147c5337c9a26107e
-   else:
+    else:
         form = UserRegisterForm()
 
     context = {
