@@ -69,16 +69,12 @@
                 {% endif %}
             </div>
         </div>
-        <hr/>
         {% endfor %}
 
         {% if user.is_authenticated %}
-        {% for msg in messages %}
-            <p class="text-success">{{msg}}</p>
-        {% endfor %}
         <form method="post">
             {% csrf_token %}
-            <table class="table table-bordered">
+            <table class="table table-responsive">
                 {{answerform.as_table}}
                 <tr>
                     <td colspan="2">

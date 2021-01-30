@@ -36,7 +36,8 @@ class UserLoginForm(forms.Form):
 
 
 class UserRegisterForm(forms.ModelForm):
-    email = forms.EmailField(label='Email address')
+    email = forms.EmailField(label='Email address',
+                             help_text="Enter valid email address")
     password = forms.CharField(min_length=8, widget=forms.PasswordInput)
 
     class Meta:

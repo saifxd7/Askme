@@ -96,35 +96,35 @@ def register_view(request):
             # user = ASCIIUsernameValidator()
             password = form.cleaned_data.get('password')
             user.set_password(password)
+
+            # current_site = get_current_site(request)
+            # mail_subject = 'Activate your account.'
+            # message = render_to_string('accounts/acc_active_email.html', {
+            #     'user': user,
+            #     'domain': current_site.domain,
+            #     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            #     'token': default_token_generator.make_token(user),
+            # })
+            # to_email = form.cleaned_data.get('email')
+            # email = EmailMessage(
+            #     mail_subject, message, to=[to_email]
+            # )
+            # email.send()
+            # return HttpResponse('Please confirm your email address to complete the registration')
             user.save()
+            # new_user = authenticate(
+            #     username=user.username, password=password)
+            # messages.success(request, 'Register Successfully.')
+            # login(request, new_user)
 
-            new_user = authenticate(
-                username=user.username, password=password)
-            messages.success(request, 'Register Successfully.')
-            login(request, new_user)
-
-            if next:
-                return redirect(next)
-            return redirect("/")
+            # if next:
+            #     return redirect(next)
+            # return redirect("/")
 
         else:
             messages.error(
                 request, 'Invalid reCAPTCHA. Please try again.')
 
-        current_site = get_current_site(request)
-        mail_subject = 'Activate your account.'
-        message = render_to_string('accounts/acc_active_email.html', {
-            'user': user,
-            'domain': current_site.domain,
-            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-            'token': default_token_generator.make_token(user),
-        })
-        to_email = form.cleaned_data.get('email')
-        email = EmailMessage(
-            mail_subject, message, to=[to_email]
-        )
-        email.send()
-        return HttpResponse('Please confirm your email address to complete the registration')
     else:
         form = UserRegisterForm()
 
