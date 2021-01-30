@@ -6,9 +6,11 @@ from django.contrib import messages
 from .forms import AnswerForm, QuestionForm  # ProfileForm
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Count
+
+from django.contrib.auth.decorators import login_required
+
+
 # Home Page
-
-
 def home(request):
     if 'q' in request.GET:
         q = request.GET['q']
@@ -24,6 +26,7 @@ def home(request):
 
 
 # Detail
+@login_required
 def detail(request, id):
     quest = Question.objects.get(pk=id)
     tags = quest.tags.split(',')
@@ -96,7 +99,7 @@ def save_downvote(request):
             )
             return JsonResponse({'bool': True})
 
-
+@login_required
 def ask_form(request):
     form = QuestionForm
     if request.method == 'POST':
@@ -111,6 +114,7 @@ def ask_form(request):
 
 
 # Questions according to tag
+@login_required
 def tag(request, tag):
     quests = Question.objects.annotate(total_comments=Count(
         'answer__comment')).filter(tags__icontains=tag).order_by('-id')
@@ -121,7 +125,7 @@ def tag(request, tag):
 
 # Profile
 
-
+@login_required
 def profile(request):
     quests = Question.objects.filter(user=request.user).order_by('-id')
     answers = Answer.objects.filter(user=request.user).order_by('-id')
@@ -145,7 +149,7 @@ def profile(request):
 
 # Tags Page
 
-
+@login_required
 def tags(request):
     quests = Question.objects.all()
     tags = []
