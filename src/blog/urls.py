@@ -22,16 +22,18 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 # views import
-from accounts import views
+from accounts import views as account_views
 
 urlpatterns = [
     path('', include("Qpost.urls")),
     # path('blog/', include("boards.urls", namespace="blog-app")),
     path('admin/', admin.site.urls),
-    path('register/', views.register_view, name='register'),
-    path('activate/<uidb64>/<token>/', views.activate, name='activate'),
-    path('login/', views.login_view, name='login'),
-    path('logout/', views.logout_view, name='logout'),
+    path('profile/', account_views.profile, name='profile'),
+    path('register/', account_views.register_view, name='register'),
+    path('activate/<uidb64>/<token>/', account_views.activate, name='activate'),
+    path('login/', account_views.login_view, name='login'),
+    path('logout/', account_views.logout_view, name='logout'),
+
     # path('comments/', include("comments.urls")),
     # path('reset/', auth_views.Password_reset.as_view()),
     # path('reset/done/', auth_views.Password_reset_done.as_view()),

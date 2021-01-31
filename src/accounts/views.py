@@ -116,16 +116,13 @@ def register_view(request):
             messages.success(request, 'Register Successfully.')
             login(request, new_user)
 
-            
             if next:
                 return redirect(next)
             return redirect("/")
 
-
         else:
             messages.error(
                 request, 'Invalid reCAPTCHA. Please try again.')
-
 
     else:
         form = UserRegisterForm()
@@ -156,3 +153,8 @@ def activate(request, uidb64, token):
         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')
+
+
+@login_required
+def profile(request):
+    return render(request, 'accounts/profile.html')
