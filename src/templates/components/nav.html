@@ -9,15 +9,16 @@
         </button>
         
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav text-sm-center pl-lg-5 font-weight-normal">
+            {# if request.user.is_authenticated #}
+            <!-- <ul class="navbar-nav text-sm-center pl-lg-5 font-weight-normal">
                 <li class="nav-item">
-                    <a class="nav-link bttn btn" href="{% url 'tags' %}">Tags</a>
+                    <a class="nav-link" href="#">About us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link bttn btn" href="#">About us</a>
+                    <a class="nav-link" href="#">Contact us </a>
                 </li>
-            </ul>
-            
+            </ul> -->
+            {# endif #}
             <div class="row ml-lg-auto justify-content-center">
                 <!-- <div class="col-auto">
                     <form class="form-inline ">
@@ -28,6 +29,7 @@
                 <a class="bttn btn btn-default" href='{% url "register" %}'>Register</a>
                 <a class="bttn btn btn-default ml-1" href='{% url "login" %}'>Login</a>
                 {% else %}
+                
                 <span class="text-white nav-item font-italic my-2">Hello, {{request.user}}</span>
                 <div class="col-auto">
                     <a class="bttn btn btn-default" href="#" role="button" aria-pressed="false"
@@ -37,15 +39,14 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         
 
-                        <a class="dlink dropdown-item" href="{% url 'profile'%}">My account</a>
+                        <!-- <a class="dlink dropdown-item" href="{% url 'profile'%}">My account</a> -->
                         <a class="dlink dropdown-item" href="#">Change Password</a>
                         <a class="dlink dropdown-item" href="{% url 'logout' %}">Log Out</a>
                     </div>
                 </div>
-                {% endif %}    
+                {% endif %}
             
             </div>
         </div>
     </div>
 </nav>
-
