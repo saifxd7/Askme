@@ -3,18 +3,38 @@
 {% block title %}All Tags{% endblock %}
 {% block content %}
     <!-- Question List -->
-    <div class="container py-5">
-        <div class="row">
-            {% for tag in tags %}
-            <div class="col-2">
-                <div class="card">
+    <div class="card container py-5 shadow" >
+        <div class="text-center">
+            <h2 class="font-weight-bold">All Tags</h2>
+        </div>
+        <hr/>
+        
+            
+            <!-- <div class="col-2" >
+                <div class="card bg-secondary text-white">
                     <div class="card-body">
-                        <p class="card-text"><a href="/tag/{{tag.name|slugify}}">{{tag.name}} 
+                        <p class="card-text" ><a href="/tag/{{tag.name|slugify}}">{{tag.name}} 
                             <span class="badge badge-info">{{tag.count}}</span></a></p>
                     </div>
                 </div>
-            </div>
+            </div> -->
+            {% for tag in tags %}
+            
+                <div class="row row-content align-items-center">
+                    <div class="col flex-first">
+                        <div class="media m-2">
+                            <div class="media-body px-3 ">
+                                <p class="card-text" ><a href="/tag/{{tag.name|slugify}}" style="text-decoration:none; color: #10002b">{{tag.name}} 
+                                        <span class="badge badge-info">{{tag.count}}</span></a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+
             {% endfor %}
-        </div>
+        
     </div>
+
+
 {% endblock %}
