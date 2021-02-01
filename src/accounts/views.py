@@ -155,6 +155,6 @@ def activate(request, uidb64, token):
         return HttpResponse('Activation link is invalid!')
 
 
-@login_required
-def profile(request):
-    return render(request, 'accounts/profile.html')
+# @login_required
+# def profile(request):
+#     return render(request, 'accounts/profile.html')

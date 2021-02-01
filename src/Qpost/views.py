@@ -99,6 +99,7 @@ def save_downvote(request):
             )
             return JsonResponse({'bool': True})
 
+
 @login_required
 def ask_form(request):
     form = QuestionForm
@@ -125,27 +126,6 @@ def tag(request, tag):
 
 # Profile
 
-@login_required
-def profile(request):
-    quests = Question.objects.filter(user=request.user).order_by('-id')
-    answers = Answer.objects.filter(user=request.user).order_by('-id')
-    comments = Comment.objects.filter(user=request.user).order_by('-id')
-    upvotes = UpVote.objects.filter(user=request.user).order_by('-id')
-    downvotes = DownVote.objects.filter(user=request.user).order_by('-id')
-    if request.method == 'POST':
-        profileForm = ProfileForm(request.POST, instance=request.user)
-        if profileForm.is_valid():
-            profileForm.save()
-            messages.success(request, 'Profile has been updated.')
-    form = ProfileForm(instance=request.user)
-    return render(request, 'registration/profile.html', {
-        'form': form,
-        'quests': quests,
-        'answers': answers,
-        'comments': comments,
-        'upvotes': upvotes,
-        'downvotes': downvotes,
-    })
 
 # Tags Page
 
@@ -167,3 +147,28 @@ def tags(request):
         }
         tag_with_count.append(tag_data)
     return render(request, 'tags.html', {'tags': tag_with_count})
+
+# Not yet done
+
+
+@login_required
+def profile(request):
+    quests = Question.objects.filter(user=request.user).order_by('-id')
+    answers = Answer.objects.filter(user=request.user).order_by('-id')
+    comments = Comment.objects.filter(user=request.user).order_by('-id')
+    upvotes = UpVote.objects.filter(user=request.user).order_by('-id')
+    downvotes = DownVote.objects.filter(user=request.user).order_by('-id')
+    if request.method == 'POST':
+        profileForm = ProfileForm(request.POST, instance=request.user)
+        if profileForm.is_valid():
+            profileForm.save()
+            messages.success(request, 'Profile has been updated.')
+    form = ProfileForm(instance=request.user)
+    return render(request, 'registration/profile.html', {
+        'form': form,
+        'quests': quests,
+        'answers': answers,
+        'comments': comments,
+        'upvotes': upvotes,
+        'downvotes': downvotes,
+    })

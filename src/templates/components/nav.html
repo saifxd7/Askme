@@ -9,7 +9,6 @@
         </button>
         
         <div class="collapse navbar-collapse" id="navbarNav">
-            {# if request.user.is_authenticated #}
             <ul class="navbar-nav text-sm-center pl-lg-5 font-weight-normal">
                 <li class="nav-item">
                     <a class="nav-link bttn btn" href="{% url 'tags' %}">Tags</a>
@@ -18,7 +17,7 @@
                     <a class="nav-link bttn btn" href="#">About us</a>
                 </li>
             </ul>
-            {# endif #}
+            
             <div class="row ml-lg-auto justify-content-center">
                 <!-- <div class="col-auto">
                     <form class="form-inline ">
@@ -29,7 +28,6 @@
                 <a class="bttn btn btn-default" href='{% url "register" %}'>Register</a>
                 <a class="bttn btn btn-default ml-1" href='{% url "login" %}'>Login</a>
                 {% else %}
-                
                 <span class="text-white nav-item font-italic my-2">Hello, {{request.user}}</span>
                 <div class="col-auto">
                     <a class="bttn btn btn-default" href="#" role="button" aria-pressed="false"
@@ -44,7 +42,7 @@
                         <a class="dlink dropdown-item" href="{% url 'logout' %}">Log Out</a>
                     </div>
                 </div>
-                {% endif %}
+                {% endif %}    
             
             </div>
         </div>
