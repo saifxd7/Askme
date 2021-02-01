@@ -19,7 +19,7 @@ def home(request):
     else:
         quests = Question.objects.annotate(
             total_comments=Count('answer__comment')).all().order_by('-id')
-    paginator = Paginator(quests, 10)
+    paginator = Paginator(quests, 5)
     page_num = request.GET.get('page', 1)
     quests = paginator.page(page_num)
     return render(request, 'index.html', {'quests': quests})
