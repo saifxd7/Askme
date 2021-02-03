@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect, render_to_response
+from django.shortcuts import render, HttpResponse, redirect
 from django.http import JsonResponse
 from .models import Question, Answer, Comment, UpVote, DownVote
 from django.core.paginator import Paginator
