@@ -1,6 +1,9 @@
 from django.urls import path
 from . import views
 
+handler404 = 'Qpost.views.handler404'
+
+
 urlpatterns = [
     path('', views.home, name="home"),
     path('detail/<int:id>', views.detail, name='detail'),
@@ -15,5 +18,6 @@ urlpatterns = [
     path('tag/<str:tag>', views.tag, name='tag'),
     # Tags Page
     path('tags', views.tags, name='tags'),
+
 
 ]

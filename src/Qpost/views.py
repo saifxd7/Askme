@@ -149,6 +149,11 @@ def tags(request):
         tag_with_count.append(tag_data)
     return render(request, 'tags.html', {'tags': tag_with_count})
 
+
+def handler404(request, exception):
+    return render(request, '404.html')
+
+
 # Not yet done
 
 

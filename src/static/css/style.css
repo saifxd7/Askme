@@ -30,13 +30,14 @@ body {
 }
 
 .nav-link {
+    text-decoration: none;
     margin-right: 1em !important;
     margin-bottom: 5px;
 }
 
 /* .nav-link:hover {
-    background-color: #ffffff;
-    border-radius: 5px;
+    
+    font-style: italic;
     color: #10002b;
 } */
 
