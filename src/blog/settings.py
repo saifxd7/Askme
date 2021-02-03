@@ -158,4 +158,4 @@ EMAIL_PORT = os.environ.get('EMAIL_PORT')
 EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
