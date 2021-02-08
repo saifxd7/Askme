@@ -28,13 +28,13 @@ urlpatterns = [
     path('', include("Qpost.urls")),
     # path('blog/', include("boards.urls", namespace="blog-app")),
     path('admin/', admin.site.urls),
-    # path('profile/', account_views.profile, name='profile'),
+    # zpath('profile/', account_views.profile, name='profile'),
     path('register/', account_views.register_view, name='register'),
-    path('activate/<uidb64>/<token>/', account_views.activate, name='activate'),
+    # path('activate/<uidb64>/<token>/', account_views.activate, name='activate'),
     path('login/', account_views.login_view, name='login'),
     path('logout/', account_views.logout_view, name='logout'),
 
-    # path('comments/', include("comments.urls")),
+
     # path('reset/', auth_views.Password_reset.as_view()),
     # path('reset/done/', auth_views.Password_reset_done.as_view()),
 ]

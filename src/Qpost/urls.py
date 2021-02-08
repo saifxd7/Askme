@@ -11,8 +11,8 @@ urlpatterns = [
     path('save-upvote', views.save_upvote, name='save-upvote'),
     path('save-downvote', views.save_downvote, name='save-downvote'),
     # Profile
-    path('accounts/profile/', views.profile, name='profile'),
-    # Ask QUestion
+
+    # Ask Question
     path('ask-question', views.ask_form, name='ask-question'),
     # Tag Page
     path('tag/<str:tag>', views.tag, name='tag'),

@@ -1,163 +1,135 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    
-        <!-- <img class="rounded-circle account-img" src="">
-        <div class="media-body">
-          <h2 class="account-heading"></h2>
-          <p class="text-secondary">{{ user.email }}</p>
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-home" aria-selected="true">Profile</a>
+                <a class="nav-link" id="v-pills-questions-tab" data-toggle="pill" href="#v-pills-questions" role="tab" aria-controls="v-pills-questions" aria-selected="false">Questions</a>
+                <a class="nav-link" id="v-pills-answers-tab" data-toggle="pill" href="#v-pills-answers" role="tab" aria-controls="v-pills-answers" aria-selected="false">Answers</a>
+                <a class="nav-link" id="v-pills-comments-tab" data-toggle="pill" href="#v-pills-comments" role="tab" aria-controls="v-pills-comments" aria-selected="false">Comments</a>
+                <a class="nav-link" id="v-pills-upvotes-tab" data-toggle="pill" href="#v-pills-upvotes" role="tab" aria-controls="v-pills-upvotes" aria-selected="false">UpVotes</a>
+                <a class="nav-link" id="v-pills-downvotes-tab" data-toggle="pill" href="#v-pills-downvotes" role="tab" aria-controls="v-pills-downvotes" aria-selected="false">DownVotes</a>
+            </div>
         </div>
-         -->
-
-
-      <!-- FORM HERE -->
-      <div class="container card p-4">
-      <div class="container emp-profile">
-            <form method="post">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-img">
-                            <img src="{{ user.profile.image.url }}" alt=""/>
-                            <div class="file btn btn-lg btn-primary">
-                                Change Photo
-                                <input type="file" name="file"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="profile-head">
-                                    <h5>
-                                        {{ user.username }}
-                                    </h5>
-                                    <h6>
-                                        {{ user.email }}
-                                    </h6>
-                                    <p class="proile-rating">RANKINGS : <span>NaN/10</span></p>
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <!-- <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/> -->
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-work">
-                            <p>WORK LINK</p>
-                            <a href="">Website Link</a><br/>
-                            <a href="">Bootsnipp Profile</a><br/>
-                            <a href="">Bootply Profile</a>
-                            <p>SKILLS</p>
-                            <a href="">Web Designer</a><br/>
-                            <a href="">Web Developer</a><br/>
-                            <a href="">WordPress</a><br/>
-                            <a href="">WooCommerce</a><br/>
-                            <a href="">PHP, .Net</a><br/>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="tab-content profile-tab" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>User Id</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{user.username}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Name</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>XXX</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Email</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>XXXX</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Phone</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>XXXX</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Profession</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>XXXX</p>
-                                            </div>
-                                        </div>
-                            </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Experience</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>XXXX</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Hourly Rate</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>XXX/hr</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Total Projects</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>XX</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>English Level</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>XXXX</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Availability</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>XXX</p>
-                                            </div>
-                                        </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label>Your Bio</label><br/>
-                                        <p>Your detail description</p>
-                                    </div>
-                                </div>
-                            </div>
+        <div class="col-md-9">
+            <div class="tab-content" id="v-pills-tabContent">
+                <!-- Profile -->
+                <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                    <div class="card">
+                        <h5 class="card-header">Edit Profile</h5>
+                        <div class="card-body">
+                            {% for msg in messages %}
+                            <p class="text-success">{{msg}}</p>
+                            {% endfor %}
+                            <form method="post">
+                                {% csrf_token %}
+                                <table class="table table-bordered">
+                                    {{form.as_table}}
+                                    <tr>
+                                        <td colspan="2">
+                                            <button class="btn btn-primary">Submit</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
                         </div>
                     </div>
                 </div>
-            </form>           
+                <!-- Questions -->
+                <div class="tab-pane fade" id="v-pills-questions" role="tabpanel" aria-labelledby="v-pills-questions-tab">
+                    <div class="card">
+                        <h5 class="card-header">My Questions <span class="badge badge-info">{{quests.count}}</span></h5>
+                        <div class="card-body">
+                            {% for quest in quests %}
+                            <p><a href="/detail/{{quest.id}}">{{quest.title}}</a></p>
+                            <hr />
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <!-- Answers -->
+                <div class="tab-pane fade" id="v-pills-answers" role="tabpanel" aria-labelledby="v-pills-answers-tab">
+                    <div class="card">
+                        <h5 class="card-header">My Answers <span class="badge badge-info">{{answers.count}}</span></h5>
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Question</th>
+                                    <th>Answer</th>
+                                </tr>
+                                {% for ans in answers %}
+                                <tr>
+                                    <td><a href="/detail/{{ans.question.id}}">{{ans.question.title}}</a></td>
+                                    <td><a href="/detail/{{ans.question.id}}">{{ans.detail}}</a></td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-comments" role="tabpanel" aria-labelledby="v-pills-comments-tab">
+                    <div class="card">
+                        <h5 class="card-header">My Comments <span class="badge badge-info">{{comments.count}}</span></h5>
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Question</th>
+                                    <th>Answer</th>
+                                    <th>Comment</th>
+                                </tr>
+                                {% for comment in comments %}
+                                <tr>
+                                    <td><a href="/detail/{{comment.answer.question.id}}">{{comment.answer.question.title}}</a></td>
+                                    <td><a href="/detail/{{comment.answer.questionans.question.id}}">{{comment.answer.detail}}</a></td>
+                                    <td><a href="/detail/{{comment.answer.question.id}}">{{comment.comment}}</a></td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-upvotes" role="tabpanel" aria-labelledby="v-pills-upvotes-tab">
+                    <div class="card">
+                        <h5 class="card-header">My Comments <span class="badge badge-info">{{upvotes.count}}</span></h5>
+                        <div class="card-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Question</th>
+                            <th>Answer</th>
+                        </tr>
+                        {% for upvote in upvotes %}
+                        <tr>
+                            <td><a href="/detail/{{upvote.answer.question.id}}">{{upvote.answer.question.title}}</a></td>
+                            <td><a href="/detail/{{upvote.answer.question.id}}">{{upvote.answer.detail}}</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-downvotes" role="tabpanel" aria-labelledby="v-pills-downvotes-tab">
+                    <div class="card">
+                        <h5 class="card-header">My Comments <span class="badge badge-info">{{downvotes.count}}</span></h5>
+                        <div class="card-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Question</th>
+                            <th>Answer</th>
+                        </tr>
+                        {% for downvote in downvotes %}
+                        <tr>
+                            <td><a href="/detail/{{downvote.answer.question.id}}">{{downvote.answer.question.title}}</a></td>
+                            <td><a href="/detail/{{downvote.answer.question.id}}">{{downvote.answer.detail}}</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        </div>
-{% endblock content %}
+    </div>
+</div>
+{% endblock %}

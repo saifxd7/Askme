@@ -121,7 +121,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+
+TIME_ZONE = 'Asia/Kolkata'
+
 
 USE_I18N = True
 
@@ -147,7 +149,7 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_files")
 MEDIA_URL = "/media/"
 
 # Recaptcha
-GOOGLE_RECAPTCHA_SECRET_KEY = os.environ.get('GOOGLE_RECAPTCHA_SECRET_KEY')
+GOOGLE_RECAPTCHA_SECRET_KEY = '6LfjS-QZAAAAACYrsDvlr_A04v9NGKocDxxgZUBT'
 
 # EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
 # MAILER_EMAIL_BACKEND = EMAIL_BACKEND

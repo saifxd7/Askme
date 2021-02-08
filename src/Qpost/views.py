@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from .models import Question, Answer, Comment, UpVote, DownVote
 from django.core.paginator import Paginator
 from django.contrib import messages
-from .forms import AnswerForm, QuestionForm  # ProfileForm
+from .forms import AnswerForm, QuestionForm
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Count
 
@@ -157,24 +157,24 @@ def handler404(request, exception):
 # Not yet done
 
 
-@login_required
-def profile(request):
-    quests = Question.objects.filter(user=request.user).order_by('-id')
-    answers = Answer.objects.filter(user=request.user).order_by('-id')
-    comments = Comment.objects.filter(user=request.user).order_by('-id')
-    upvotes = UpVote.objects.filter(user=request.user).order_by('-id')
-    downvotes = DownVote.objects.filter(user=request.user).order_by('-id')
-    if request.method == 'POST':
-        profileForm = ProfileForm(request.POST, instance=request.user)
-        if profileForm.is_valid():
-            profileForm.save()
-            messages.success(request, 'Profile has been updated.')
-    form = ProfileForm(instance=request.user)
-    return render(request, 'registration/profile.html', {
-        'form': form,
-        'quests': quests,
-        'answers': answers,
-        'comments': comments,
-        'upvotes': upvotes,
-        'downvotes': downvotes,
-    })
+# @login_required
+# def profile(request):
+#     quests = Question.objects.filter(user=request.user).order_by('-id')
+#     answers = Answer.objects.filter(user=request.user).order_by('-id')
+#     comments = Comment.objects.filter(user=request.user).order_by('-id')
+#     upvotes = UpVote.objects.filter(user=request.user).order_by('-id')
+#     downvotes = DownVote.objects.filter(user=request.user).order_by('-id')
+#     if request.method == 'POST':
+#         profileForm = ProfileForm(request.POST, instance=request.user)
+#         if profileForm.is_valid():
+#             profileForm.save()
+#             messages.success(request, 'Profile has been updated.')
+#     form = ProfileForm(instance=request.user)
+#     return render(request, 'registration/profile.html', {
+#         'form': form,
+#         'quests': quests,
+#         'answers': answers,
+#         'comments': comments,
+#         'upvotes': upvotes,
+#         'downvotes': downvotes,
+#     })
