@@ -2,6 +2,7 @@
 {% load crispy_forms_tags %}
 {% load static %}
 
+{% block title %}<title>{{title}}</title>{% endblock %}
 
 {% block content %}
 {% if not request.user.is_authenticated %}

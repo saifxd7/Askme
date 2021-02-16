@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 
 # Home Page
 def home(request):
+    title = "Askme - Home"
     if 'q' in request.GET:
         q = request.GET['q']
         quests = Question.objects.annotate(total_comments=Count(
@@ -23,12 +24,13 @@ def home(request):
     paginator = Paginator(quests, 5)
     page_num = request.GET.get('page', 1)
     quests = paginator.page(page_num)
-    return render(request, 'index.html', {'quests': quests})
+    return render(request, 'index.html', {'quests': quests, 'title': title})
 
 
 # Detail
 @login_required
 def detail(request, id):
+
     quest = Question.objects.get(pk=id)
     tags = quest.tags.split(',')
     answers = Answer.objects.filter(question=quest)
@@ -45,7 +47,8 @@ def detail(request, id):
         'quest': quest,
         'tags': tags,
         'answers': answers,
-        'answerform': answerform
+        'answerform': answerform,
+
     })
 
 # Save Comment
