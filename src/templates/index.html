@@ -7,8 +7,9 @@
     <!-- Question List -->
 
     
-
+    
     <div class="container mt-4">
+        {# if quest #}
         {% for quest in quests %}
         <div class="card mb-2 shadow">
             <div class="card-body">
@@ -29,6 +30,13 @@
             </div>
         </div>
         {% endfor %}
+        {% if not quests %}
+            <div class="card mb-2 shadow">
+            <div class="card-body">
+                <h4 class="card-title">Not found question.</h4>
+            </div>
+            </div>
+        {% endif %}
     </div>
     {% if quests.has_other_pages %}
     <!-- Pagination -->
@@ -50,5 +58,6 @@
         </ul>
       </nav>
     {% endif %}
+    
 </div>
 {% endblock %}
