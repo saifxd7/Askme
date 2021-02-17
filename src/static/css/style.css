@@ -3,7 +3,7 @@
 body {
     padding: 0;
     margin: 0;
-    background: #fff;
+    background: #f9f1f1 !important;
     font-family: "Lato", sans-serif;
 }
 
@@ -20,7 +20,8 @@ body {
 
 .navbar-brand {
     font-size: 24px;
-    font-weight: 900;
+    font-weight: 700;
+    font-style: italic;
 }
 
 .nav-link,

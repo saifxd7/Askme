@@ -28,7 +28,7 @@ urlpatterns = [
     path('', include("Qpost.urls")),
     # path('blog/', include("boards.urls", namespace="blog-app")),
     path('admin/', admin.site.urls),
-    # zpath('profile/', account_views.profile, name='profile'),
+    path('profile/', account_views.profile, name='profile'),
     path('register/', account_views.register_view, name='register'),
     # path('activate/<uidb64>/<token>/', account_views.activate, name='activate'),
     path('login/', account_views.login_view, name='login'),

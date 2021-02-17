@@ -1,10 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
-# Create your models here.
+
+from accounts.models import CustomUser
+
+# Custom User Model
 
 
+# Question Model
 class Question(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     title = models.CharField(max_length=300)
     detail = models.TextField()
     tags = models.TextField(default='')
@@ -18,7 +22,7 @@ class Question(models.Model):
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     detail = models.TextField()
     add_time = models.DateTimeField(auto_now_add=True)
 
@@ -31,7 +35,7 @@ class Answer(models.Model):
 class Comment(models.Model):
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='comment_user')
+        CustomUser, on_delete=models.CASCADE, related_name='comment_user')
     comment = models.TextField(default='')
     add_time = models.DateTimeField(auto_now_add=True)
 
@@ -44,7 +48,7 @@ class Comment(models.Model):
 class UpVote(models.Model):
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='upvote_user')
+        CustomUser, on_delete=models.CASCADE, related_name='upvote_user')
 
 # DownVotes
 
@@ -52,4 +56,4 @@ class UpVote(models.Model):
 class DownVote(models.Model):
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='downvote_user')
+        CustomUser, on_delete=models.CASCADE, related_name='downvote_user')

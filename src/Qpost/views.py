@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 
 # Home Page
 def home(request):
-    title = "Askme - Home"
+    title = "AskNow - Home"
     if 'q' in request.GET:
         q = request.GET['q']
         quests = Question.objects.annotate(total_comments=Count(

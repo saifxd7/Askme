@@ -8,12 +8,14 @@ from django.contrib.auth import (
 from django.shortcuts import render, redirect
 
 from django.contrib import messages
-from .forms import UserLoginForm, UserRegisterForm
+from .forms import UserLoginForm, UserRegisterForm, ProfileForm
 from django.contrib.auth.decorators import login_required
 import json
 import urllib
 import urllib.request
 from blog import settings
+
+from Qpost.models import *
 
 
 def login_view(request):
@@ -106,3 +108,26 @@ def logout_view(request):
     logout(request)
     messages.success(request, 'Logout Successfully..')
     return redirect("/")
+
+
+# Profile
+def profile(request):
+    quests = Question.objects.filter(user=request.user).order_by('-id')
+    answers = Answer.objects.filter(user=request.user).order_by('-id')
+    comments = Comment.objects.filter(user=request.user).order_by('-id')
+    upvotes = UpVote.objects.filter(user=request.user).order_by('-id')
+    downvotes = DownVote.objects.filter(user=request.user).order_by('-id')
+    if request.method == 'POST':
+        profileForm = ProfileForm(request.POST, instance=request.user)
+        if profileForm.is_valid():
+            profileForm.save()
+            messages.success(request, 'Profile has been updated.')
+    form = ProfileForm(instance=request.user)
+    return render(request, 'accounts/profile.html', {
+        'form': form,
+        'quests': quests,
+        'answers': answers,
+        'comments': comments,
+        'upvotes': upvotes,
+        'downvotes': downvotes,
+    })

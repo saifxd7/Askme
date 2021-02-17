@@ -47,7 +47,7 @@ INSTALLED_APPS = [
 
     # apps
     'accounts',
-    'boards',
+    # 'boards',
     'Qpost',
 
 ]
@@ -161,3 +161,5 @@ GOOGLE_RECAPTCHA_SECRET_KEY = '6LfjS-QZAAAAACYrsDvlr_A04v9NGKocDxxgZUBT'
 # DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#
+AUTH_USER_MODEL = 'accounts.CustomUser'
