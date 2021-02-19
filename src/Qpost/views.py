@@ -1,5 +1,5 @@
-from django.shortcuts import render, HttpResponse, redirect
-from django.http import JsonResponse
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
+from django.http import JsonResponse, Http404
 from .models import Question, Answer, Comment, UpVote, DownVote
 from django.core.paginator import Paginator
 from django.contrib import messages
@@ -51,58 +51,6 @@ def detail(request, id):
 
     })
 
-# Save Comment
-
-
-def save_comment(request):
-    if request.method == 'POST':
-        comment = request.POST['comment']
-        answerid = request.POST['answerid']
-        answer = Answer.objects.get(pk=answerid)
-        user = request.user
-        Comment.objects.create(
-            answer=answer,
-            comment=comment,
-            user=user
-        )
-        return JsonResponse({'bool': True})
-
-# Save Upvote
-
-
-def save_upvote(request):
-    if request.method == 'POST':
-        answerid = request.POST['answerid']
-        answer = Answer.objects.get(pk=answerid)
-        user = request.user
-        check = UpVote.objects.filter(answer=answer, user=user).count()
-        if check > 0:
-            return JsonResponse({'bool': False})
-        else:
-            UpVote.objects.create(
-                answer=answer,
-                user=user
-            )
-            return JsonResponse({'bool': True})
-
-# Save Downvote
-
-
-def save_downvote(request):
-    if request.method == 'POST':
-        answerid = request.POST['answerid']
-        answer = Answer.objects.get(pk=answerid)
-        user = request.user
-        check = DownVote.objects.filter(answer=answer, user=user).count()
-        if check > 0:
-            return JsonResponse({'bool': False})
-        else:
-            DownVote.objects.create(
-                answer=answer,
-                user=user
-            )
-            return JsonResponse({'bool': True})
-
 
 @login_required
 def ask_form(request, id=0):
@@ -126,16 +74,89 @@ def ask_form(request, id=0):
 
         return redirect('home')
 
+# Save Comment
 
+
+def save_comment(request):
+    if request.method == 'POST':
+        comment = request.POST['comment']
+        answerid = request.POST['answerid']
+        answer = Answer.objects.get(pk=answerid)
+        user = request.user
+        Comment.objects.create(
+            answer=answer,
+            comment=comment,
+            user=user
+        )
+        return JsonResponse({'bool': True})
+
+
+# Save Upvote
+
+
+def save_upvote(request):
+    if request.method == 'POST':
+        answerid = request.POST['answerid']
+        answer = Answer.objects.get(pk=answerid)
+        user = request.user
+        check = UpVote.objects.filter(answer=answer, user=user).count()
+        if check > 0:
+            return JsonResponse({'bool': False})
+        else:
+            UpVote.objects.create(
+                answer=answer,
+                user=user
+            )
+            return JsonResponse({'bool': True})
+
+
+# Save Downvote
+
+def save_downvote(request):
+    if request.method == 'POST':
+        answerid = request.POST['answerid']
+        answer = Answer.objects.get(pk=answerid)
+        user = request.user
+        check = DownVote.objects.filter(answer=answer, user=user).count()
+        if check > 0:
+            return JsonResponse({'bool': False})
+        else:
+            DownVote.objects.create(
+                answer=answer,
+                user=user
+            )
+            return JsonResponse({'bool': True})
+
+
+# delete question
 @login_required
 def question_delete(request, id):
     question = Question.objects.get(pk=id)
     question.delete()
     return redirect('home')
 
+# delete answer
+
+
+def answer_delete(request, id):
+    answer = Answer.objects.get(pk=id)
+    if answer.user.id != request.user.id:
+        raise Http404
+    answer.delete()
+    return redirect('home')
+
+# delete comment
+
+
+def delete_comment(request, id):
+    comment = Comment.objects.get(pk=id)
+    if comment.user.id != request.user.id:
+        raise Http404
+    comment.delete()
+    return redirect('home')
+
+
 # Questions according to tag
-
-
 @login_required
 def tag(request, tag):
     quests = Question.objects.annotate(total_comments=Count(
@@ -144,8 +165,6 @@ def tag(request, tag):
     page_num = request.GET.get('page', 1)
     quests = paginator.page(page_num)
     return render(request, 'tag.html', {'quests': quests, 'tag': tag})
-
-# Profile
 
 
 # Tags Page
@@ -168,33 +187,3 @@ def tags(request):
         }
         tag_with_count.append(tag_data)
     return render(request, 'tags.html', {'tags': tag_with_count})
-
-
-def handler404(request, exception):
-    return render(request, '404.html')
-
-
-# Not yet done
-
-
-# @login_required
-# def profile(request):
-#     quests = Question.objects.filter(user=request.user).order_by('-id')
-#     answers = Answer.objects.filter(user=request.user).order_by('-id')
-#     comments = Comment.objects.filter(user=request.user).order_by('-id')
-#     upvotes = UpVote.objects.filter(user=request.user).order_by('-id')
-#     downvotes = DownVote.objects.filter(user=request.user).order_by('-id')
-#     if request.method == 'POST':
-#         profileForm = ProfileForm(request.POST, instance=request.user)
-#         if profileForm.is_valid():
-#             profileForm.save()
-#             messages.success(request, 'Profile has been updated.')
-#     form = ProfileForm(instance=request.user)
-#     return render(request, 'registration/profile.html', {
-#         'form': form,
-#         'quests': quests,
-#         'answers': answers,
-#         'comments': comments,
-#         'upvotes': upvotes,
-#         'downvotes': downvotes,
-#     })

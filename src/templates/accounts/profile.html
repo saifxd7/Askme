@@ -64,15 +64,17 @@
                             {% for quest in quests %}
                             <div>
                                 <a href="/detail/{{quest.id}}">{{quest.title}}</a>
-                                <a href="{% url 'question-update' quest.id %}" class="btn text-secondary float-right">
-                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                </a>
-                                <form action="{% url 'question-delete' quest.id %}" method="post" class="float-right">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                    </button>
-                                </form>
+                                <div class="d-flex flex-row-reverse">
+                                    <form action="{% url 'question-delete' quest.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-lg text-danger" onclick="return confirm('Are you sure you want to delete this question?')">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </button>
+                                    </form>
+                                    <a href="{% url 'question-update' quest.id %}" class="btn btn-lg text-dark">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                </div>
                             </div>
                             <hr />
                             {% endfor %}
@@ -88,11 +90,20 @@
                                 <tr>
                                     <th>Question</th>
                                     <th>Answer</th>
+                                    <th>Options</th>
                                 </tr>
                                 {% for ans in answers %}
                                 <tr>
                                     <td><a href="/detail/{{ans.question.id}}">{{ans.question.title}}</a></td>
                                     <td><a href="/detail/{{ans.question.id}}">{{ans.detail}}</a></td>
+                                    <td>
+                                        <form action="{% url 'answer-delete' ans.id %}" method="post">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-lg text-danger" onclick="return confirm('Are you sure you want to delete this answer?')">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </button>
+                                        </form>
+                                    </td>
                                 </tr>
                                 {% endfor %}
                             </table>
@@ -108,12 +119,21 @@
                                     <th>Question</th>
                                     <th>Answer</th>
                                     <th>Comment</th>
+                                    <th>Options</th>
                                 </tr>
                                 {% for comment in comments %}
                                 <tr>
                                     <td><a href="/detail/{{comment.answer.question.id}}">{{comment.answer.question.title}}</a></td>
                                     <td><a href="/detail/{{comment.answer.questionans.question.id}}">{{comment.answer.detail}}</a></td>
                                     <td><a href="/detail/{{comment.answer.question.id}}">{{comment.comment}}</a></td>
+                                    <td>
+                                        <form action="{% url 'comment-delete' comment.id %}" method="post">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-lg text-danger">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </button>
+                                        </form>
+                                    </td>
                                 </tr>
                                 {% endfor %}
                             </table>

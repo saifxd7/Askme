@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.views.generic.base import RedirectView
+from django.contrib.staticfiles.storage import staticfiles_storage
 from django.contrib import admin
 from django.urls import path, include
 
@@ -33,11 +35,12 @@ urlpatterns = [
     # path('activate/<uidb64>/<token>/', account_views.activate, name='activate'),
     path('login/', account_views.login_view, name='login'),
     path('logout/', account_views.logout_view, name='logout'),
-
+    # path('favicon.ico$/‘, RedirectView.as_view(url=staticfiles_storage.url('/favicon.ico/'),permanent=False), name ='favicon')
 
     # path('reset/', auth_views.Password_reset.as_view()),
     # path('reset/done/', auth_views.Password_reset_done.as_view()),
 ]
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,

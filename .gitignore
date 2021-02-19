@@ -1,4 +1,4 @@
 /env/
-datadump.json
-db.sqlite3
+/src/datadump.json
+/src/db.sqlite3
 .env

@@ -36,7 +36,11 @@ body {
     margin-bottom: 5px;
 }
 
-
+.btn:focus,
+.btn:active {
+    outline: none !important;
+    box-shadow: none;
+}
 
 
 /* .nav-link:hover {
@@ -70,6 +74,18 @@ body {
     background-color: #fff;
     color: #10002b;
 }
+
+.abtn{
+    color: #fff;
+}
+.abtn:hover{
+    font-style: italic;
+    font-weight: bold;
+    border: 1px solid #fff;
+    color: #fff; 
+
+}
+
 
 /* search btn */
 .sbtn {

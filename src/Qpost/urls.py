@@ -1,13 +1,14 @@
 from django.urls import path
 from . import views
 
-handler404 = 'Qpost.views.handler404'
-
 
 urlpatterns = [
     path('', views.home, name="home"),
     path('detail/<int:id>', views.detail, name='detail'),
+    path('answer/delete/<int:id>/',
+         views.answer_delete, name='answer-delete'),
     path('save-comment', views.save_comment, name='save-comment'),
+    path('comment/delete/<int:id>/', views.delete_comment, name='comment-delete'),
     path('save-upvote', views.save_upvote, name='save-upvote'),
     path('save-downvote', views.save_downvote, name='save-downvote'),
     # Profile
