@@ -38,9 +38,6 @@
                     <div class="card">
                         <h5 class="card-header">Edit Profile</h5>
                         <div class="card-body">
-                            <!-- {% for msg in messages %}
-                            <p class="text-success">{{msg}}</p>
-                            {% endfor %} -->
                             <form method="post">
                                 {% csrf_token %}
                                 <table class="table table-bordered table-responsive">
@@ -58,10 +55,25 @@
                 <!-- Questions -->
                 <div class="tab-pane fade" id="v-pills-questions" role="tabpanel" aria-labelledby="v-pills-questions-tab">
                     <div class="card">
-                        <h5 class="card-header">My Questions <span class="badge badge-info">{{quests.count}}</span></h5>
+                        <div class="card-header d-flex justify-content-between">
+                            
+                            <h5>My Questions <span class="badge badge-info">{{quests.count}}</span></h5>
+                            <a href="{% url 'ask-question' %}" class="btn qbtn"><i class="fa fa-plus" aria-hidden="true"></i> Add New</a>
+                        </div>
                         <div class="card-body">
                             {% for quest in quests %}
-                            <p><a href="/detail/{{quest.id}}">{{quest.title}}</a></p>
+                            <div>
+                                <a href="/detail/{{quest.id}}">{{quest.title}}</a>
+                                <a href="{% url 'question-update' quest.id %}" class="btn text-secondary float-right">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                                <form action="{% url 'question-delete' quest.id %}" method="post" class="float-right">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </div>
                             <hr />
                             {% endfor %}
                         </div>

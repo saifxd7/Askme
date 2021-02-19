@@ -13,11 +13,14 @@ urlpatterns = [
     # Profile
 
     # Ask Question
-    path('ask-question', views.ask_form, name='ask-question'),
+    path('ask-question/', views.ask_form, name='ask-question'),
+    path('ask-question/<int:id>/', views.ask_form, name='question-update'),
+    path('ask-question/delete/<int:id>/',
+         views.question_delete, name='question-delete'),
     # Tag Page
-    path('tag/<str:tag>', views.tag, name='tag'),
+    path('tag/<str:tag>/', views.tag, name='tag'),
     # Tags Page
-    path('tags', views.tags, name='tags'),
+    path('tags/', views.tags, name='tags'),
 
 
 ]

@@ -105,20 +105,37 @@ def save_downvote(request):
 
 
 @login_required
-def ask_form(request):
-    form = QuestionForm
-    if request.method == 'POST':
-        questForm = QuestionForm(request.POST)
-        if questForm.is_valid():
-            questForm = questForm.save(commit=False)
-            questForm.user = request.user
-            questForm.save()
-            messages.success(request, 'Question has been added.')
-            return redirect('home')
-    return render(request, 'ask-question.html', {'form': form})
+def ask_form(request, id=0):
+    if request.method == 'GET':
+        if id == 0:
+            form = QuestionForm
+        else:
+            question = Question.objects.get(pk=id)
+            form = QuestionForm(instance=question)
+        return render(request, 'ask-question.html', {'form': form})
+    else:
+        if id == 0:
+            form = QuestionForm(request.POST)
+        else:
+            question = Question.objects.get(pk=id)
+            form = QuestionForm(request.POST, instance=question)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.user = request.user
+            form.save()
 
+        return redirect('home')
+
+
+@login_required
+def question_delete(request, id):
+    question = Question.objects.get(pk=id)
+    question.delete()
+    return redirect('home')
 
 # Questions according to tag
+
+
 @login_required
 def tag(request, tag):
     quests = Question.objects.annotate(total_comments=Count(

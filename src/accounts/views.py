@@ -110,7 +110,7 @@ def logout_view(request):
     return redirect("/")
 
 
-# Profile
+@login_required
 def profile(request):
     quests = Question.objects.filter(user=request.user).order_by('-id')
     answers = Answer.objects.filter(user=request.user).order_by('-id')
