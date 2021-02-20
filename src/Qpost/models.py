@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 from accounts.models import CustomUser
 
+from ckeditor.fields import RichTextField
 # Custom User Model
 
 
@@ -10,7 +11,8 @@ from accounts.models import CustomUser
 class Question(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     title = models.CharField(max_length=300)
-    detail = models.TextField()
+    detail = RichTextField()
+    # detail = models.TextField()
     tags = models.TextField(default='')
     add_time = models.DateTimeField(auto_now_add=True)
 
