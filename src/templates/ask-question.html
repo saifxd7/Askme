@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block title %}<title>AskNow - Ask Question</title>{% endblock %}
+{% block style %}
+<style>
+    .hidden{
+        display:none;
+    }
+</style>
+{% endblock %}
 {% block content %}
 <div class="container">
     <div class="card mt-5">

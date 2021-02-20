@@ -22,7 +22,7 @@
         <!-- Question List -->
             <div class="card container">
                 <h2 class="my-4">{{quest.title}}</h2>
-                <p>{{quest.detail}}</p>
+                <p id="q-detail"></p> {#quest.detail#}
                 <p>
                     tags:
                     {% for tag in tags %}
@@ -190,6 +190,80 @@
             });
         });
     });
+    
+    // editorjs 
+
+    window.addEventListener('DOMContentLoaded', ()=>{
+        const qDetail=document.getElementById('q-detail')
+        let body=JSON.parse("{{quest.detail|escapejs}}")
+        let blocks=body.blocks
+        for (let index = 0; index < blocks.length; index++){
+            switch(blocks[index].type){
+                case 'Header':
+                    let head=document.createElement(`h${blocks[index].data.level}`)
+                    head.textContent=blocks[index].data.text
+                    qDetail.appendChild(head)
+                    break;
+                case 'Image':
+                    let div=document.createElement('div')
+                    let image=document.createElement('img')
+                    image.classList.add('card-img');
+                    let caption=document.createElement('h5')
+                    image.src = `http://127.0.0.1:8000${blocks[index].data.file.url}`
+                    
+                    caption.textContent=blocks[index].data.caption
+                    div.appendChild(image)
+                    div.appendChild(caption)
+                    qDetail.appendChild(div)
+                    break;
+                case 'List':
+                    let list;
+                    if (blocks[index].data.style=='unordered'){
+                        list=document.createElement('ul')
+                    }else{
+                        list=document.createElement('ol')
+                    }
+                    for (const item in blocks[index].data.items){
+                        let li=document.createElement('li')
+                        li.textContent=blocks[index].data.items[item]
+                        list.appendChild(li)
+                    }
+                    qDetail.appendChild(list)
+                    break;
+                case 'Raw':
+                    let blockquote=document.createElement('blockquote')
+                    let code=document.createElement('code')
+                    let pre=document.createElement('pre')
+                    pre.textContent=blocks[index].data.html
+                    pre.style.background='#131313'
+                    pre.style.color='#dddddd'
+                    pre.style.padding = '15px'
+                    code.appendChild(pre)
+                    qDetail.appendChild(code)
+                    break;
+                case 'Attaches':
+                    let parent=document.createElement('div')
+                    let a=document.createElement('a')
+                    let name=document.createElement('h3')
+                    let size=document.createElement('h3')
+                    a.href=`http://127.0.0.1:8000${blocks[index].data.file.url}`
+                    a.textContent=`Download ${blocks[index].data.file.extension}`
+                    name.textContent=blocks[index].data.file.name
+                    size.textContent=blocks[index].data.file.size
+                    parent.appendChild(a)
+                    parent.appendChild(name)
+                    parent.appendChild(size)
+                    qDetail.appendChild(parent)
+                    break;
+                case 'paragraph':
+                    const p = document.createElement('p')
+                    p.innerHTML=blocks[index].data.text
+                    qDetail.appendChild(p)
+                default:
+                    break;
+            }
+        }
+    })
 </script>
 
 <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
