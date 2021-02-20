@@ -210,7 +210,7 @@
                     image.classList.add('card-img');
                     let caption=document.createElement('h5')
                     image.src = `http://127.0.0.1:8000${blocks[index].data.file.url}`
-                    
+                    image.src = `http://askme-xd7.herokuapp.com${blocks[index].data.file.url}`
                     caption.textContent=blocks[index].data.caption
                     div.appendChild(image)
                     div.appendChild(caption)
