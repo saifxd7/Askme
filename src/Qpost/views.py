@@ -10,8 +10,12 @@ from django.db.models import Count
 
 from django.contrib.auth.decorators import login_required
 
+from django.views.decorators.csrf import requires_csrf_token
+from django.core.files.storage import FileSystemStorage
 
 # Home Page
+
+
 def home(request):
     title = "AskNow - Home"
     if 'q' in request.GET:
@@ -187,3 +191,27 @@ def tags(request):
         }
         tag_with_count.append(tag_data)
     return render(request, 'tags.html', {'tags': tag_with_count})
+
+
+# upload image
+@requires_csrf_token
+def upload_image_view(request):
+    f = request.FILES['image']
+    fs = FileSystemStorage()
+    filename = str(f).split('.')[0]
+    file = fs.save(filename, f)
+    fileurl = fs.url(file)
+
+    return JsonResponse({'success': 1, 'file': {'url': fileurl}})
+
+
+# upload file
+@requires_csrf_token
+def upload_file_view(request):
+    f = request.FILES['file']
+    fs = FileSystemStorage()
+    filename, ext = str(f).split('.')
+    file = fs.save(filename, f)
+    fileurl = fs.url(file)
+
+    return JsonResponse({'success': 1, 'file': {'url': fileurl, 'size': fs.size(filename), "name": str(f), "extension": ext}})

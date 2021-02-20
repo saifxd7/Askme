@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 from accounts.models import CustomUser
 
-from ckeditor.fields import RichTextField
+from django_editorjs import EditorJsField
 # Custom User Model
 
 
@@ -11,8 +11,25 @@ from ckeditor.fields import RichTextField
 class Question(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     title = models.CharField(max_length=300)
-    detail = RichTextField()
-    # detail = models.TextField()
+    detail = EditorJsField(editorjs_config={
+        'tools': {
+            'Image': {
+                "config": {
+                    'endpoints': {
+                        'byFile': '/imageUpload/',
+                        'byUrl': '/imageUpload/',
+                    },
+                    'additionalRequestHeaders': [{"content-Type": 'multipart/form-data'}]}
+            },
+            "Attaches": {
+                "config": {
+                    "endpoint": '/fileUpload/'
+                },
+
+            }
+        }
+    })
+
     tags = models.TextField(default='')
     add_time = models.DateTimeField(auto_now_add=True)
 

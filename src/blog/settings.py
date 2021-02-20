@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'markdown_deux',
     'pagedown',
-    'ckeditor',
+    'django_editorjs',
 
     # apps
     'accounts',

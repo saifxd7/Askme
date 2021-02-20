@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
     path('', views.home, name="home"),
@@ -22,6 +23,6 @@ urlpatterns = [
     path('tag/<str:tag>/', views.tag, name='tag'),
     # Tags Page
     path('tags/', views.tags, name='tags'),
-
-
+    path('fileUpload/', csrf_exempt(views.upload_file_view)),
+    path('imageUpload/', csrf_exempt(views.upload_image_view)),
 ]

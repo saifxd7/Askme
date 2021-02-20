@@ -2,9 +2,9 @@ asgiref==3.3.1
 autopep8==1.5.4
 dj-database-url==0.5.0
 Django==3.1.3
-django-ckeditor==6.0.0
 django-crispy-forms==1.9.2
 django-dotenv==1.4.2
+django-editorjs==0.2.1
 django-js-asset==1.2.2
 django-markdown-deux==1.0.5
 django-pagedown==2.1.3
