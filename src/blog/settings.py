@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 from pathlib import Path
 import os
-
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,10 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '1qbibocsi^uabkh)bw174w7am4eltv$b%ja4%iu^m-9c^rz*f8'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', cast=bool, default=True)
 
 ALLOWED_HOSTS = ['askme-xd7.herokuapp.com', '127.0.0.1']
 
@@ -92,8 +92,12 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'asknow',
+        'USER': 'saif',
+        'PASSWORD': '123',
+        'HOST': 'localhost',
+
     }
 }
 
@@ -104,9 +108,18 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'OPTIONS': {
+            'user_attributes': (
+                'username', 'email'
+            ),
+            'max_similarity': 0.5,
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 8,
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -150,17 +163,18 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_files")
 MEDIA_URL = "/media/"
 
 # Recaptcha
-GOOGLE_RECAPTCHA_SECRET_KEY = '6LfjS-QZAAAAACYrsDvlr_A04v9NGKocDxxgZUBT'
+GOOGLE_RECAPTCHA_SECRET_KEY = config('GOOGLE_RECAPTCHA_SECRET_KEY')
 
-# EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
-# MAILER_EMAIL_BACKEND = EMAIL_BACKEND
-# EMAIL_HOST = os.environ.get('EMAIL_HOST')
-# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-# EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-# EMAIL_PORT = os.environ.get('EMAIL_PORT')
-# EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL')
-# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_BACKEND = config('EMAIL_BACKEND')
+EMAIL_HOST = config('EMAIL_HOST', default='localhost')
+MAILER_EMAIL_BACKEND = EMAIL_BACKEND
+EMAIL_PORT = config('EMAIL_PORT', default=25, cast=int)
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-#
+
 AUTH_USER_MODEL = 'accounts.CustomUser'

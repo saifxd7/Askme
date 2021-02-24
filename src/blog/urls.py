@@ -23,6 +23,9 @@ from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
 
+# forms
+from accounts.forms import PwdResetForm, PwdChangeForm, PwdResetConfirmForm
+
 # views import
 from accounts import views as account_views
 
@@ -32,13 +35,17 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('profile/', account_views.profile, name='profile'),
     path('register/', account_views.register_view, name='register'),
-    # path('activate/<uidb64>/<token>/', account_views.activate, name='activate'),
     path('login/', account_views.login_view, name='login'),
     path('logout/', account_views.logout_view, name='logout'),
-    # path('favicon.ico$/‘, RedirectView.as_view(url=staticfiles_storage.url('/favicon.ico/'),permanent=False), name ='favicon')
+    path('password_reset/', auth_views.PasswordResetView.as_view(template_name="accounts/password_reset_form.html",
+                                                                 form_class=PwdResetForm), name='pwdreset'),
+    path('password_change/', auth_views.PasswordChangeView.as_view(template_name="accounts/password_change_form.html",
+                                                                   form_class=PwdChangeForm), name='pwdforgot'),
+    path('password_reset_confirm/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(
+        template_name='accounts/password_reset_confirm.html', form_class=PwdResetConfirmForm), name="pwdresetconfirm"),
 
-    # path('reset/', auth_views.Password_reset.as_view()),
-    # path('reset/done/', auth_views.Password_reset_done.as_view()),
+    path('activate/<slug:uidb64>/<slug:token>)/',
+         account_views.activate, name='activate'),
 ]
 
 

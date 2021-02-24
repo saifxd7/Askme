@@ -21,7 +21,13 @@
                 <input type='submit' class='qbtn btn btn-default btn-block' value='{{ title }}' />
                 {{form.error}}
             </form>
+            <div class="d-flex justify-content-between mt-3">
+                <a href="{% url 'pwdreset'%}" class="text-muted">Forgot Password?</a>
+                <a href="{% url 'register'%}" >Create New Account</a>
+
+            </div>
         </div>
+
 
     </div>
 </section>
