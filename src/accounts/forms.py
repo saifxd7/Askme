@@ -20,7 +20,8 @@ User = get_user_model()
 
 class UserLoginForm(forms.Form):
     username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={'autocomplete': 'off', 'data-toggle': 'password'}))
 
     def clean(self, *args, **kwargs):
         username = self.cleaned_data.get("username")
@@ -47,7 +48,7 @@ class UserRegisterForm(forms.ModelForm):
     #email2 = forms.EmailField(label='Confirm Email')
 
     password = forms.CharField(
-        widget=forms.PasswordInput)
+        widget=forms.PasswordInput(attrs={'autocomplete': 'off', 'data-toggle': 'password'}))
 
     def clean_username(self):
         username = self.cleaned_data['username'].lower()
