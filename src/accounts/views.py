@@ -58,6 +58,7 @@ def login_view(request):
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
             login(request, user)
+
             messages.success(request, 'Login Successfully.')
             if next:
                 return redirect(next)

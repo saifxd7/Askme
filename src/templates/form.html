@@ -11,7 +11,7 @@
         <div class="card-body">
                 <h5 class="card-title text-uppercase text-center font-weight-bold">{{title}}</h5>
                 <hr />
-                
+                {{messages.errors}}
             <form method='POST' action='' enctype='multipart/form-data'>
                 {% csrf_token %}
                 {{ form | crispy }}
@@ -26,7 +26,7 @@
                 <div class="g-recaptcha" data-sitekey="6LfjS-QZAAAAAJQTJfFwXj1egTD7ZeqN0MpaWFnt"></div>
                 <br>
                 <input type='submit' class='qbtn btn btn-default btn-block' value='{{ title }}' />
-                {{form.error}}
+                
             </form>
             {% url 'login' as login %}
             {% if request.get_full_path == login %}
