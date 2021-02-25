@@ -15,6 +15,13 @@
             <form method='POST' action='' enctype='multipart/form-data'>
                 {% csrf_token %}
                 {{ form | crispy }}
+                <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="box" onclick ="reveal()">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Show password
+                </label>
+                </div>
+                <br>
                 <script src='https://www.google.com/recaptcha/api.js'></script>
                 <div class="g-recaptcha" data-sitekey="6LfjS-QZAAAAAJQTJfFwXj1egTD7ZeqN0MpaWFnt"></div>
                 <br>
@@ -37,6 +44,19 @@
 <section>
     
 </section>
+
+<script type="text/javascript">
+function reveal()
+{
+if(document.getElementById('box').checked)
+   {document.getElementById("pw").type='text';}
+else
+document.getElementById("pw").type='password';
+}
+</script>   
+
+    
+
 
 {# else #}
     {# include "index.html" #}
