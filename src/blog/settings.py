@@ -171,7 +171,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 MAILER_EMAIL_BACKEND = EMAIL_BACKEND
 EMAIL_PORT = 587
 EMAIL_HOST_PASSWORD = 'asknow@123'
-EMAIL_HOST_USER = 'asknow.xd.noreply@gmail.com'
+EMAIL_HOST_USER = 'noreply.asknowxd@gmail.com'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
