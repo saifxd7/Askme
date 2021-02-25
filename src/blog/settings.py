@@ -21,10 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = '1qbibocsi ^ uabkh)bw174w7am4eltv$b%ja4%iu^m-9c^rz*f8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', cast=bool, default=True)
+DEBUG = True
 
 ALLOWED_HOSTS = ['askme-xd7.herokuapp.com', '127.0.0.1']
 
@@ -163,15 +163,15 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_files")
 MEDIA_URL = "/media/"
 
 # Recaptcha
-GOOGLE_RECAPTCHA_SECRET_KEY = config('GOOGLE_RECAPTCHA_SECRET_KEY')
+GOOGLE_RECAPTCHA_SECRET_KEY = '6LfjS-QZAAAAACYrsDvlr_A04v9NGKocDxxgZUBT'
 
-EMAIL_BACKEND = config('EMAIL_BACKEND')
-EMAIL_HOST = config('EMAIL_HOST', default='localhost')
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
 MAILER_EMAIL_BACKEND = EMAIL_BACKEND
-EMAIL_PORT = config('EMAIL_PORT', default=25, cast=int)
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
-EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
-EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)
+EMAIL_PORT = 587
+EMAIL_HOST_PASSWORD = 'asknow@123'
+EMAIL_HOST_USER = 'asknow.xd.noreply@gmail.com'
+EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 

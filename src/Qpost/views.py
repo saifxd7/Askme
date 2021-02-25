@@ -63,13 +63,18 @@ def ask_form(request, id=0):
             form = QuestionForm
         else:
             question = Question.objects.get(pk=id)
+            if question.user.id != request.user.id:
+                raise Http404
             form = QuestionForm(instance=question)
         return render(request, 'ask-question.html', {'form': form})
     else:
         if id == 0:
             form = QuestionForm(request.POST)
         else:
+
             question = Question.objects.get(pk=id)
+            if question.user.id != request.user.id:
+                raise Http404
             form = QuestionForm(request.POST, instance=question)
         if form.is_valid():
             form = form.save(commit=False)
