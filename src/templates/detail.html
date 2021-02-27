@@ -210,7 +210,7 @@
                     image.classList.add('card-img');
                     let caption=document.createElement('h5')
                     image.src = `http://127.0.0.1:8000${blocks[index].data.file.url}`
-                    image.src = `http://askme-xd7.herokuapp.com${blocks[index].data.file.url}`
+                    image.src = `http://asknow-xd7.herokuapp.com${blocks[index].data.file.url}`
                     caption.textContent=blocks[index].data.caption
                     div.appendChild(image)
                     div.appendChild(caption)
@@ -247,7 +247,7 @@
                     let name=document.createElement('h3')
                     let size=document.createElement('h3')
                     a.href=`http://127.0.0.1:8000${blocks[index].data.file.url}`
-                    a.href=`http://askme-xd7.herokuapp.com${blocks[index].data.file.url}`
+                    a.href=`http://asknow-xd7.herokuapp.com${blocks[index].data.file.url}`
                     a.textContent=`Download ${blocks[index].data.file.extension}`
                     name.textContent=blocks[index].data.file.name
                     size.textContent=blocks[index].data.file.size
