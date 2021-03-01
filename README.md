@@ -1,7 +1,7 @@
 # Askme
 
 In progress <br /> for demonstration
-[a link](http://asknow-xd7.herokuapp.com/)
+[Web Application](http://asknow-xd7.herokuapp.com/)
 
 1. Create virtual environment and activate the environment
 
