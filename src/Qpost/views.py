@@ -89,6 +89,7 @@ def ask_form(request, id=0):
 def save_comment(request):
     if request.method == 'POST':
         comment = request.POST['comment']
+
         answerid = request.POST['answerid']
         answer = Answer.objects.get(pk=answerid)
         user = request.user

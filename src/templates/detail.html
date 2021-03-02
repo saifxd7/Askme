@@ -119,7 +119,7 @@
                 url:"/save-comment",
                 type:"post",
                 data:{
-                    comment:_comment,
+                    comment:(_comment=='')? alert('Error, Comment field is required'): _comment,
                     answerid:_answerid,
                     csrfmiddlewaretoken:"{{csrf_token}}"
                 },
