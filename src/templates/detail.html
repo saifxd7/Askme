@@ -108,18 +108,26 @@
     
 
 <script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
     $(document).ready(function(){
         $(".save-comment").on('click',function(){
             var _answerid=$(this).data('answer');
 
             var _comment=$(".comment-text-"+_answerid).val();
+            //
+            if(_comment == ''){
+                alert('Error, Comment field is required');
+                return ;
+            }
             console.log(_comment, _answerid);
             // Ajax
             $.ajax({
                 url:"/save-comment",
                 type:"post",
                 data:{
-                    comment:(_comment=='')? alert('Error, Comment field is required'): _comment,
+                    comment:_comment, //(_comment=='')? alert('Error, Comment field is required') :  
                     answerid:_answerid,
                     csrfmiddlewaretoken:"{{csrf_token}}"
                 },

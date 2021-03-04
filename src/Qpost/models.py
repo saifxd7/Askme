@@ -55,7 +55,7 @@ class Comment(models.Model):
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
     user = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE, related_name='comment_user')
-    comment = models.TextField(default='')
+    comment = models.TextField(default='', blank=False)
     add_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
