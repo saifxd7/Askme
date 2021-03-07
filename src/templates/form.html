@@ -32,7 +32,7 @@
             {% if request.get_full_path == login %}
             <div class="d-flex justify-content-between mt-3">
                 <a href="{% url 'pwdreset'%}" class="text-muted">Forgot Password?</a>
-                <a href="{% url 'register'%}" >Create New Account</a>
+                <a href="{% url 'register'%}" >Register Account</a>
 
             </div>
             {% endif %}
@@ -49,7 +49,7 @@ const pass=document.querySelector("#pw");
 visible.addEventListener('click',function(e){
     const type= pass.getAttribute("type") === "password" ? "text" : "password";
     pass.setAttribute("type",type);
-    visible.checked;
+    visible.querySelector("#box").checked;
 });
 </script>   
 
