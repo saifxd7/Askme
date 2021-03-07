@@ -15,9 +15,9 @@
             <form method='POST' action='' enctype='multipart/form-data'>
                 {% csrf_token %}
                 {{ form | crispy }}
-                <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="box" onclick ="reveal()">
-                <label class="form-check-label" for="flexCheckDefault">
+                <div class="form-check" id="show">
+                <input class="form-check-input" type="checkbox" id="box" onclick="reveal()">
+                <label class="form-check-label" for="flexCheckDefault" >
                     Show password
                 </label>
                 </div>
@@ -41,18 +41,16 @@
 
     </div>
 </section>
-<section>
-    
-</section>
+
 
 <script type="text/javascript">
-function reveal()
-{
-if(document.getElementById('box').checked)
-   {document.getElementById("pw").type='text';}
-else
-document.getElementById("pw").type='password';
-}
+const visible=document.querySelector("#show");
+const pass=document.querySelector("#pw");
+visible.addEventListener('click',function(e){
+    const type= pass.getAttribute("type") === "password" ? "text" : "password";
+    pass.setAttribute("type",type);
+    visible.checked;
+});
 </script>   
 
     

@@ -27,6 +27,7 @@ from django.conf.urls.static import static
 from accounts.forms import PwdResetForm, PwdChangeForm, PwdResetConfirmForm
 
 # views import
+
 from accounts import views as account_views
 
 urlpatterns = [
@@ -34,6 +35,7 @@ urlpatterns = [
     # path('blog/', include("boards.urls", namespace="blog-app")),
     path('admin/', admin.site.urls),
     path('profile/', account_views.profile, name='profile'),
+
     path('register/', account_views.register_view, name='register'),
     path('login/', account_views.login_view, name='login'),
     path('logout/', account_views.logout_view, name='logout'),
